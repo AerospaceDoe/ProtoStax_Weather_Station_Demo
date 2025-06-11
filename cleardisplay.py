@@ -3,8 +3,8 @@
 
 # *************************************************** 
 #   This is a example program for
-#   a Weather Station using Raspberry Pi B+, Waveshare ePaper Display and ProtoStax enclosure
-#   --> https://www.waveshare.com/product/modules/oleds-lcds/e-paper/2.7inch-e-paper-hat-b.htm
+#   a Weather Station using Raspberry Pi 3 Model B, Waveshare ePaper Display and ProtoStax enclosure
+#   --> https://www.waveshare.com/product/displays/e-paper/epaper-2/2.7inch-e-paper-hat.htm
 #   --> https://www.protostax.com/products/protostax-for-raspberry-pi-b
 #
 #   This program is used to clear the ePaper display. If you are powering down your
@@ -12,24 +12,26 @@
 #   that the display be cleared prior to storage, to prevent any burn-in.
  
 #   Written by Sridhar Rajagopal for ProtoStax.
+#   Modified by AerospaceDoe.
 #   BSD license. All text above must be included in any redistribution
 # *
-import sys
-sys.path.append(r'lib')
 
-import epd2in7b
+import sys
+# sys.path.append(r'lib')
+
+from waveshare_epd import epd2in7
 import time
 from PIL import Image,ImageDraw,ImageFont
 import traceback
 
 try:
-    epd = epd2in7b.EPD()
+    epd = epd2in7.EPD()
     epd.init()
     print("Clear...")
-    epd.Clear()
-    
+    epd.Clear(0xFF)
+
     epd.sleep()
-        
+
 except :
     print ('traceback.format_exc():\n%s',traceback.format_exc())
     exit()
